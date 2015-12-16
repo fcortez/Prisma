@@ -1,0 +1,16 @@
+<ion-view view-title="Usuarios registrados">
+    <ion-content ng-class="{expanded:isExpanded}">
+        <div class="content has-header" ng-repeat="user in users">
+            <div class="list">
+                <a href="#/app/profile" class="item item-avatar item-icon-right">
+                    <img ng-src="{{user.picture}}">
+                    <h2>{{user.name}}</h2>
+                    <p>{{user.provider}}</p>
+                    <p style="font-size:10px">{{user.horaingreso | date:"dd MMM 'a las' HH:mm"}}</p>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+
+

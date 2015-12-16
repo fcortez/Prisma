@@ -1,0 +1,50 @@
+<button id="fab-activity" ng-click="redir('{{authData}}')" class="button button-fab button-fab-top-right expanded button-energized-900 spin"><i class="icon ion-plus"></i></button>
+<ion-view view-title="Ayuda Memoria">
+    <ion-content ng-class="{expanded:isExpanded}" delegate-handle="actividad">
+        <div class="list card stable-bg" ng-repeat="board in boards" ng-if="board.subject == 'Recordatorio'"> 
+            <div class="item item-avatar" ng-style="estilo({{board}})" style="color: white"> 
+                <img ng-src="{{board.imgcreator}}"> 
+                <stron>
+                <h2 style="color: white" ng-if="authData.google">{{board.createdby}}</h2></strong>
+                <h2 style="color: white" ng-if="authData.facebook">{{board.createdby}}</h2>
+                <h2 style="color: white" ng-if="authData.twitter">{{board.createdby}}</h2>
+                <h2 style="color: white" ng-if="authData.password">{{board.createdby}}</h2>
+                 <h4 style="color: white">"{{board.activityName}}"</h4>
+                <h5 style="color: white"> {{board.createddate | date:"dd MMM 'a las' HH:mm"}}</h5> 
+             </div> 
+             <div class="item item-body"> {{board.descripcion}}
+                <p> 
+                    <a class="subdued" ng-show="board.rank"> {{board.rank}} <i class="icon ion-android-favorite assertive"></i></a> 
+                    <a class="subdued" ng-show="board.count"> {{board.count}} <i class="icon ion-chatbubble positive"></i></a> 
+                </p> 
+            </div> 
+            <div class="item tabs tabs-secondary tabs-icon-left"> 
+                <a class="tab-item" ng-click="like($index)" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-thumbsup"> </i> Me Gusta </a> 
+                <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" ng-click="joinChat($index)"> <i class="icon ion-chatbox"></i> Conversar </a> 
+                  <span ng-show="user.name == board.createdby">
+                  <a class="tab-item" confirmation-needed="¿Estas seguro de eliminar esta actividad?" ng-click="boards.$remove(board)">
+                  <i class=" icon ion-trash-a assertive"></i>
+                  </a>
+                </span>                
+                <span ng-show="authData.facebook && authData.uid == board.idcreator">
+                  <a class="tab-item" confirmation-needed="¿Estas seguro de eliminar esta actividad?" ng-click="boards.$remove(board)">
+                  <i class=" icon ion-trash-a assertive"></i>
+                  </a>
+                </span>
+                <span ng-show="authData.google && authData.uid == board.idcreator">
+                  <a class="tab-item" confirmation-needed="¿Estas seguro de eliminar esta actividad?" ng-click="boards.$remove(board)">
+                  <i class=" icon ion-trash-a assertive"></i>           
+                  </a>
+                </span>
+                <span ng-show="authData.twitter && authData.uid == board.idcreator">
+                  <a class="tab-item" confirmation-needed="¿Estas seguro de eliminar esta actividad?" ng-click="boards.$remove(board)">
+                  <i class=" icon ion-trash-a assertive"></i>           
+                  </a>
+                </span>
+            </div> 
+        </div>  
+        <div class="room" ng-show="boards.length == 0">
+            <h3 align="center" style="color:grey; padding-top: 50%">No hay recordatorios aún</h3>
+        </div> 
+    </ion-content>
+</ion-view>

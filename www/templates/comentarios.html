@@ -1,0 +1,97 @@
+<ion-view view-title="Conversación">
+  <ion-content ng-class="{expanded:isExpanded}">
+  	<div class="bar bar-subheader bar-stable static text-center">
+  		<strong class="title">{{commentInfo.activityName}}</strong>
+  	</div>
+
+  	<ion-content has-bouncing="true" class="has-header has-footer" 
+              delegate-handle="userMessageScroll">
+            
+              <div ng-repeat="msgs in commentMessages" class="message-wrapper"
+              >
+                  <div ng-if="msgs.creatorid !== authData.uid" on-hold="onMessageHold($event, $index, msgs)">
+                      
+                    <img class="profile-pic left" ng-src="{{msgs.userimg}}" onerror="onProfilePicError(this)" />
+      
+                      <div class="chat-bubble left">
+      
+                          <div class="message" ng-bind-html="msgs.message | nl2br" autolinker>
+                          </div>
+      
+                          <div class="message-detail">
+                              <span ng-click="viewProfile(message)" 
+                                  class="bold">{{msgs.commentedby}}</span><br>
+                              <span style="font-size:10px">{{msgs.commenteddate | date:"dd MMM 'a las' HH:mm"}}</span>
+                          </div>      
+                      </div>
+                  </div>
+
+
+
+      
+                  <div ng-if="msgs.creatorid === authData.uid" on-hold="onMessageHold($event, $index, msgs)">
+                       <img class="profile-pic right" ng-src="{{msgs.userimg}}" onerror="onProfilePicError(this)" />
+                    
+                      <div class="chat-bubble right">
+      
+                          <div class="message" ng-bind-html="msgs.message | nl2br" autolinker>
+                          </div>
+      
+                          <div class="message-detail">
+                              <span ng-click="viewProfile(message)" 
+                                  class="bold">{{msgs.commentedby}}</span><br>
+                              <span style="font-size:10px">{{msgs.commenteddate | date:"dd MMM 'a las' HH:mm"}}</span>
+                          </div>
+      
+                      </div>
+                    
+                  </div>
+                  <div class="cf"></div>
+
+
+      
+              </div>
+
+
+          </ion-content>
+
+ <!--
+	  <div class="list list-inset" ng-repeat="msgs in commentMessages | orderBy:'-commenteddate'"> 
+	    <div class="item item-avatar" > 
+      	<img ng-src="{{msgs.userimg}}"> 
+        <h2><strong>{{msgs.commentedby}}</strong><span style="color:grey; font-size:12px;"> dice:</span></h2>                
+        <p>{{msgs.message}}</p> 
+        <p>{{msgs.commenteddate | date: "dd-mm 'a las' HH:mm"}}</p>
+      </div> 
+		  <div class="message" ng-show="!commentMessages">
+	      <h4>Cargando, porfavor espere...</h4>
+	    </div>
+	    <div class="message" ng-show="commentMessages && commentMessages.length == 0">
+	      <h4>Sin comentarios!</h4>
+	    </div>
+	  </div>
+</ion-content>
+
+	  <ion-footer-bar class="bar-footer"> 		
+	  		<input type="text" placeholder="Escribe Aquí" ng-model="msg.message" ng-keypress="sendMessage($event)">
+            <button class="button button-calm icon-right ion-paper-airplane pull-right" ng-click="sendMessage();"></button>
+	  </ion-fotter-bar>  -->
+  <div class="message" ng-show="commentMessages.length == 0">
+      <h3 align="center" style="color:grey; padding-top: 50%">No hay comentarios aún</h3>
+  </div>
+
+	<form name="sendMessageForm" ng-submit="sendMessage($event)" novalidate ng-controller="commentCtrl">
+              <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+                  <label class="item-input-wrapper">
+                      <textarea style="width:100%" ng-model="msg.message" value="" placeholder="Escribe tu mensaje..." required minlength="1" maxlength="1500" msd-elastic></textarea>
+                  </label>
+                  <div class="footer-btn-wrap">
+                    <button style="color:blue" ng-click="sendMessage($event)" class="button button-icon icon ion-android-send button-clear footer-btn" type="submit"
+                        ng-disabled="!msg.message || msg.message === ''">
+                    </button>
+                  </div>
+              </ion-footer-bar>
+        </form>
+
+</ion-view>
+

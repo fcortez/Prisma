@@ -1,0 +1,50 @@
+<ion-view view-title="Galeria de afiches">
+<button id="fab-gallery" ng-click="addImage()" class="button button-fab button-fab-top-right expanded button-energized-900 drop"><i class="icon ion-image"></i></button>
+    <ion-content ng-class="{expanded:isExpanded}" delegate-handle="galeria">
+         <div ng-repeat="img in image" class="list card" style="width: 90%; margin: 5% auto 5% auto" >
+                <div class="item item-avatar" ng-style="estilo({{img}})">
+                    <img ng-src="{{img.imgautor}}"> 
+                    <h2 style="color: white; font-weight: bold ">{{img.name}}</h2>
+                    <h4 style="color: white">"{{img.origin}}"</h4>
+                    <h4 style="color: #FFD600"> {{img.date | date:"dd MMM 'a las' HH:mm"}}</h4>  
+                </div>
+                <img class="full-image" data-ng-src="{{img.image}}">
+                <div class="item tabs tabs-secondary tabs-icon-left">
+                    <a class="tab-item assertive" ng-click="like($index)">
+                        <i class="icon ion-heart"></i>
+                        <span ng-show="img.rank">{{img.rank}}</span>
+                    </a>
+                    <a ng-click="joinChat($index)" class="tab-item positive-900">
+                        <i class="icon ion-chatbubbles"></i>
+                        <span ng-show="img.count">{{img.count}}</span>
+                    </a>
+                    <span ng-show="authData.google && authData.uid == img.autorid" class="tab-item">
+                    <a confirmation-needed="¿Estas seguro de eliminar este afiche?" ng-click="image.$remove(img)" class="positive-900">
+                      <i class="icon ion-trash-a assertive"></i>
+                    </a>
+                    </span>
+                    <span ng-show="authData.facebook && authData.uid == img.autorid" class="tab-item">
+                    <a confirmation-needed="¿Estas seguro de eliminar este afiche?" ng-click="image.$remove(img)" class="positive-900">
+                      <i class="icon ion-trash-a assertive"></i>
+                    </a>
+                    </span>
+                    <span ng-show="authData.twitter && authData.uid == img.autorid" class="tab-item">
+                    <a confirmation-needed="¿Estas seguro de eliminar este afiche?" ng-click="image.$remove(img)" class="positive-900">
+                      <i class="icon ion-trash-a assertive"></i>
+                    </a>
+                    </span>
+                    <span ng-show="authData.password &&authData.uid == img.autorid" class="tab-item">
+                    <a confirmation-needed="¿Estas seguro de eliminar este afiche?" ng-click="image.$remove(img)" class="positive-900">
+                      <i class="icon ion-trash-a assertive"></i>
+                    </a>
+                    </span>
+                </div>
+              </div>
+
+        <div class="room" ng-show="image.length == 0">
+            <h3 align="center" style="color:grey; padding-top: 50%">No hay afiches aún</h3>
+        </div>
+    </ion-content>
+</ion-view>
+
+

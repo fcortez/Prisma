@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Felipin\Prisma\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5a5a3d67c448686e47af37fd819937dcbe9bd966">
+        <dex dex="C:\Users\Felipin\Prisma\platforms\android\build\intermediates\pre-dexed\debug\classes-133446e39e7637ca31016f23a329373d94a6fd7f.jar" />
+    </item>
+
+</items>

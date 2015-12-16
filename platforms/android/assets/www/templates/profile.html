@@ -1,0 +1,48 @@
+<ion-view view-title="Perfil">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <div class="hero slide-up" style="background-image: url('img/cuatro.jpg');">
+            <div class="content" ng-if="authData.facebook">
+                <img class="avatar" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
+                <h3><a class="light">{{authData.facebook.displayName}}</a></h3>
+                <h4 style="color:#3F51B5"><strong>Facebook</strong></h4>
+            </div>
+            <div class="content" ng-if="authData.google">
+                <img class="avatar" ng-src="{{authData.google.cachedUserProfile.picture}}">
+                <h3><a class="light">{{authData.google.displayName}}</a></h3>
+                <h4 style="color:#F44336"><strong>Google+</strong></h4>
+            </div>
+             <div class="content" ng-if="authData.password">
+                <img class="avatar" style="background-image: url('img/user.png');">
+                <h3><a class="light">{{user.name}}</a></h3>
+                <h4>Prisma</h4>
+            </div>
+            <div class="content" ng-if="authData.twitter">
+                <img class="avatar" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url}}">
+                <h3><a class="light">{{authData.twitter.displayName}}</a></h3>
+                <h4><strong>Twitter<strong></h4>
+            </div>
+    </div>
+    <div class="tabs tabs-dark tabs-icon-top static">
+            <a ng-href="#/app/activity" class="tab-item">
+                <i class="icon ion-arrow-graph-up-right"></i> Actividades
+            </a>
+            <a ui-sref="app.friends" class="tab-item">
+                <i class="icon ion-android-people"></i> Usuarios
+            </a>
+            <a ui-sref="app.gallery" class="tab-item">
+                <i class="icon ion-images"></i> Afiches
+            </a>
+    </div>
+        <h4 class="content padding double-padding-x">Usuarios Registrados</h4>
+        <div ng-repeat="user in users" class="list">
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img ng-src="{{user.picture}}">
+                <h2>{{user.name}}</h2>
+                <p>{{user.provider}}</p>
+                <p style="font-size:10px">{{user.horaingreso | date:"dd MMM 'a las' HH:mm"}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
+
+

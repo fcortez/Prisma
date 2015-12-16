@@ -1,0 +1,25 @@
+<ion-view view-title="Agregar Actividad">
+  <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+  	<div class="list">
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Nombre de Actividad</span>
+		    <input type="text" ng-model="boards.activityName" placeholder="Nombre de Actividad">
+		  </label>
+		  <label class="item item-input item-select">
+		  	<span class="input-label">
+      		Asunto
+    		</span>
+		    <select ng-model="boards.subject">
+		      <option>Recordatorio</option>
+		      <option>Reunión</option>
+		      <option selected>Importante</option>
+		    </select>
+  		</label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Descripción</span>
+		    <textarea style="height:200px" placeholder="Descripcion" ng-model="boards.descripcion"></textarea>
+		  </label>
+		  <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="newRoom()" ng-disabled="!boards.activityName || !boards.activityName === '' || !boards.subject || !boards.subject === '' || !boards.descripcion || !boards.descripcion === '' ">Agregar actividad</button>
+		</div>
+  </ion-content>
+</ion-view>
